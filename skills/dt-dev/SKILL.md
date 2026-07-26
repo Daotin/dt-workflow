@@ -18,6 +18,7 @@ description: |
 → 【唯一硬门：用户确认 design.md】
 → 编码(dt-dev-code：拆清单 task.md → 执行)
 → Review(dt-dev-review)
+→ 提交提议（用户同意才执行 git 操作）
 → 归档(dt-dev-archive：沉淀 spec.md → 记 progress.md → 目录移 done/)
 ```
 
@@ -58,10 +59,14 @@ description: |
 3. 检查 `.gitignore` 是否包含 `.dt/`，没有则追加。
 4. 告知用户初始化完成。
 
+## 遗留任务检查
+
+`.dt/tasks/`（`done/` 之外）已有任务目录时，先提醒用户：该任务未收尾（未完成或未归档），问一句是续做、归档还是先放着，不默默开新档。
+
 ## 阶段一：梳理与建档
 
 1. 读取 `.dt/spec.md`、`.dt/progress.md` 的近期条目和与需求相关的代码。项目知识已明确的内容不重复询问；需求与已有规则冲突时，先指出冲突。
-2. 调用 `dt-think` 梳理需求与方案。任务目录在落盘时才创建：`.dt/tasks/<YYMMDD>-<英文slug>/`（如 `260726-algolia-search/`，slug 按梳理后确定的需求命名），落盘位置传 `<任务目录>/design.md`。design.md 必含章节：一句话结论 / 背景（含需求边界与调研结论）/ 方案（含权衡：为什么不选另一条路）/ 影响范围 / 风险 / 验收标准。不写 prd.md，需求内容并入 design.md。
+2. 调用 `dt-think` 梳理需求与方案。任务目录在落盘时才创建：`.dt/tasks/<YYMMDD>-<英文slug>/`（如 `260726-algolia-search/`，slug 按梳理后确定的需求命名），落盘位置传 `<任务目录>/design.md`。design.md 必含章节：一句话结论 / 背景（含需求边界与调研结论）/ 方案（含权衡：为什么不选另一条路）/ 影响范围 / 风险 / 验收标准（每条附验证方式）。不写 prd.md，需求内容并入 design.md。
 
 ## 阶段二：等待确认（唯一硬门）
 
@@ -69,11 +74,11 @@ design.md 写好后告知用户：
 
 "方案已写入 `<任务目录>/design.md`，确认后进入编码阶段；也可以提出修改意见。"
 
-用户确认前不得编码、不得创建 task.md。用户提修改意见 → 改 design.md 后再次确认。
+用户确认前不得编码、不得创建 task.md。用户提修改意见 → 改 design.md 后再次确认。确认通过后，在 design.md 标题下加一行 `> 状态：已确认 <YYYY-MM-DD>`，再进入阶段三。
 
 ## 阶段三：编码、Review 与归档
 
-用户确认后调用 `dt-dev-code`：它拆解执行清单并逐项实现，完成后自动调用 dt-dev-review 和 dt-dev-archive。
+用户确认后调用 `dt-dev-code`：它拆解执行清单并逐项实现，完成后自动调用 dt-dev-review，Review 后提议提交（用户同意才执行），再调用 dt-dev-archive。
 
 ## 中途升档
 

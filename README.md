@@ -44,7 +44,7 @@ npx skills add Daotin/dt-workflow -g
 用 dt-dev 做：给设置页加一个导出功能
 ```
 
-AI 会：首次使用自动创建 `.dt/` → 一问一答梳理需求 → 写方案文档 design.md → **等你确认（唯一硬门）** → 拆执行清单逐项实现（有并行空间时问你要不要派子代理并行）→ Review → 归档沉淀。
+AI 会：首次使用自动创建 `.dt/` → 一问一答梳理需求 → 写方案文档 design.md → **等你确认（唯一硬门）** → 拆执行清单逐项实现（有并行空间时问你要不要派子代理并行）→ Review（派子代理审）→ 提议 commit（同意才执行）→ 归档沉淀。
 
 各阶段也可单独进入：
 
@@ -89,8 +89,9 @@ flowchart TD
     J --> L[逐项实现 + 验证 + 勾选]
     K --> L
     L -->|发现方案有误| F
-    L --> M[dt-dev-review<br/>对照方案与规范审查]
-    M --> N[dt-dev-archive<br/>沉淀 spec.md → 记 progress.md → 移 done/]
+    L --> M[dt-dev-review<br/>派子代理对照方案与规范审查]
+    M --> M2[提议 commit<br/>用户同意才执行]
+    M2 --> N[dt-dev-archive<br/>沉淀 spec.md → 记 progress.md → 移 done/]
 ```
 
 执行中的两条铁律：
