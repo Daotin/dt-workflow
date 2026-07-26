@@ -76,21 +76,21 @@ AI 会：首次使用自动创建 `.dt/` → 一问一答梳理需求 → 写方
 ```mermaid
 flowchart TD
     A[需求进来] --> B{你判级}
-    B -->|微/中| C[对话里给方案 → 点头 → 直接干\n零文件]
+    B -->|微/中| C[对话里给方案 → 点头 → 直接干<br/>零文件]
     B -->|重| D[dt-dev：建任务目录]
-    D --> E[dt-think 梳理\n一次一问 + 2-3 方案对比]
-    E --> F[design.md\n需求/验收/方案/权衡]
+    D --> E[dt-think 梳理<br/>一次一问 + 2-3 方案对比]
+    E --> F[design.md<br/>需求/验收/方案/权衡]
     F --> G{{唯一硬门：你确认}}
     G -->|改| E
-    G -->|过| H[dt-dev-code 拆清单 task.md\n每步带验证，亮一下不等批]
+    G -->|过| H[dt-dev-code 拆清单 task.md<br/>每步带验证，亮一下不等批]
     H --> I{依赖分析}
-    I -->|有独立分支| J[问你：顺序还是并行？\n并行=独立分支同跑，链内永远顺序]
+    I -->|有独立分支| J[问你：顺序还是并行？<br/>并行=独立分支同跑，链内永远顺序]
     I -->|纯链条| K[主对话顺序执行]
     J --> L[逐项实现 + 验证 + 勾选]
     K --> L
     L -->|发现方案有误| F
-    L --> M[dt-dev-review\n对照方案与规范审查]
-    M --> N[dt-dev-archive\n沉淀 spec.md → 记 progress.md → 移 done/]
+    L --> M[dt-dev-review<br/>对照方案与规范审查]
+    M --> N[dt-dev-archive<br/>沉淀 spec.md → 记 progress.md → 移 done/]
 ```
 
 执行中的两条铁律：
