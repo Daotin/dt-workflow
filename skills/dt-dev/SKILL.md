@@ -19,8 +19,29 @@ description: |
 → 编码(dt-dev-code：拆清单 task.md → 执行)
 → Review(dt-dev-review)
 → 提交提议（用户同意才执行 git 操作）
-→ 归档(dt-dev-archive：沉淀 spec.md → 记 progress.md → 目录移 done/)
+→ 归档(dt-dev-archive：提醒有无值得写进 spec.md 的内容（确认后才写）→ 记 progress.md → 目录移 done/)
 ```
+
+## 与 ponytail 插件的边界
+
+**先判断本节是否适用**：当前上下文出现 `PONYTAIL MODE ACTIVE` 字样才执行本节，没有就
+整节跳过——插件已卸载或用户已 `/ponytail off`，两种情况都不需要这些约束。
+
+ponytail 生效时每轮注入、全程在场。本流程期间以下三条以 dt-dev 和项目规则为准，
+ponytail 的对应规则不适用：
+
+1. **阶段一、二不许「先做再问」**。ponytail 的 "never stall / ship the lazy version
+   first" 只适用于编码阶段。这两个阶段遇到歧义必须把解读列出来让用户选，不许默认一种
+   往下走。
+2. **design.md 写完整**。ponytail 的 "no design notes / at most three short lines"
+   不管 design.md——它属于 ponytail 自己豁免的「用户明确要求的产出」，权衡（为什么不选
+   另一条路）、影响范围、风险、验收标准一条都不能省。
+3. **测试跟随项目既有框架**。ponytail 的 "No frameworks / assert 自检脚本" 让位于项目
+   CLAUDE.md 和旁边的测试文件；要不要写测试按 dt-dev-code 规则 4 和全局 CLAUDE.md 判断，
+   不按 ponytail 的「非平凡逻辑必须留一个检查」。
+
+其余部分（阶梯、复用优先、不加无谓依赖、根因修复、`ponytail:` 标记）在编码阶段正常生效
+——ponytail 管「写多少」，dt-dev 管「什么时候写、写之前先干嘛、写完怎么验」。
 
 ## 初始化检查
 
@@ -55,7 +76,7 @@ description: |
 ## Review 必查项
 ```
 
-2. 项目根目录的 CLAUDE.md（没有则创建）追加一行：`开发任务开工前先读 .dt/spec.md；收尾归档时把新的约定 / 坑回写进去。`
+2. 项目根目录的 CLAUDE.md（没有则创建）追加一行：`开发任务开工前先读 .dt/spec.md；归档时提醒有无值得回写的约定 / 坑，确认后再写。`
 3. 检查 `.gitignore` 是否包含 `.dt/`，没有则追加。
 4. 告知用户初始化完成。
 
