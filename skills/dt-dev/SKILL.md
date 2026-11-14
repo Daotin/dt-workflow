@@ -101,7 +101,7 @@ design.md 写好后告知用户：
 
 ## 阶段三：编码、Review 与归档
 
-用户确认后调用 `dt-dev-code`：它拆解执行清单并逐项实现，完成后自动调用 dt-dev-review，Review 后提议提交（用户同意才执行），再调用 dt-dev-archive。
+用户确认后调用 `dt-dev-code`：它拆解执行清单并逐项实现，完成后自动调用 dt-dev-review，Review 后提议提交（用户同意才执行），再调用 dt-dev-archive；Review 结论是「审查未通过」时停下等用户决定，不提议提交、不归档。
 
 ## 中途升档
 
