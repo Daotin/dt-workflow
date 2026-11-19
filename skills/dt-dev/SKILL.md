@@ -15,8 +15,9 @@ description: |
 
 ```
 初始化(.dt/) → 建任务目录 → 梳理与方案（Bug / 性能任务先复现；dt-think → design.md）
+→ 询问是否让 Codex 评审方案（同意才跑 dt-codex-review）
 → 【唯一硬门：用户确认 design.md】
-→ 生成对外方案（dt-tech-doc：design.md → tech-doc.md）
+→ 询问是否生成对外方案（同意才跑 dt-tech-doc：design.md → tech-doc.md）
 → 编码(dt-dev-code：拆清单 task.md → 执行)
 → Review(dt-dev-review)
 → 提交提议（用户同意才执行 git 操作）
@@ -94,11 +95,15 @@ ponytail 的对应规则不适用：
 
 ## 阶段二：等待确认（唯一硬门）
 
-design.md 写好后告知用户：
+design.md 写好后先问用户：
+
+"方案已写入 `<任务目录>/design.md`。要不要先让 Codex 评审一遍（dt-codex-review）？"
+
+用户同意就调用 `dt-codex-review`，方案文件传 `<任务目录>/design.md`，等它结束（评审通过或停在第 3 轮）再往下走；不同意就跳过。然后告知用户：
 
 "方案已写入 `<任务目录>/design.md`，确认后进入编码阶段；也可以提出修改意见。"
 
-除阶段一允许的复现和诊断操作外，用户确认前不得编码、不得创建 task.md。用户提修改意见 → 改 design.md 后再次确认。确认通过后，在 design.md 标题下加一行 `> 状态：已确认 <YYYY-MM-DD>`，然后调用 `dt-tech-doc`，以 design.md 为素材生成给外部评审看的技术方案，写到 `<任务目录>/tech-doc.md`。调用时说明：受众是外部评审，类型是技术方案，输出路径已定，跳过提问和"骨架加样板"那一步，直接写全文。生成后告诉用户文件位置，不用等用户确认，直接进入阶段三。tech-doc.md 只给人评审，编码和 Review 都以 design.md 为准，不读 tech-doc.md。
+除阶段一允许的复现和诊断操作外，用户确认前不得编码、不得创建 task.md。用户提修改意见 → 改 design.md 后再次确认。确认通过后，在 design.md 标题下加一行 `> 状态：已确认 <YYYY-MM-DD>`，然后问用户要不要生成给外部评审看的技术方案 tech-doc.md。用户同意就调用 `dt-tech-doc`，以 design.md 为素材写到 `<任务目录>/tech-doc.md`。调用时说明：受众是外部评审，类型是技术方案，输出路径已定，跳过提问和"骨架加样板"那一步，直接写全文。生成后告诉用户文件位置，不用等用户确认，直接进入阶段三；用户不要就跳过，直接进入阶段三。tech-doc.md 只给人评审，编码和 Review 都以 design.md 为准，不读 tech-doc.md。
 
 ## 阶段三：编码、Review 与归档
 
